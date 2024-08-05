@@ -350,6 +350,16 @@ def test_get_data_decimal_type(types, params, data_type):
             },
         ),
         (
+                Types.string,
+                {'pattern': "^ab'c"},
+                {
+                    'type': 'constr',
+                    'is_func': True,
+                    'kwargs': {'regex': 'r"^ab\'c"'},
+                    'import_': IMPORT_CONSTR,
+                },
+        ),
+        (
             Types.string,
             {'minLength': 10},
             {

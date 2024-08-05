@@ -136,7 +136,7 @@ byes_kwargs: Set[str] = {'minLength', 'maxLength'}
 
 escape_characters = str.maketrans(
     {
-        "'": r'\'',
+        "'": "\'",
         '\b': r'\b',
         '\f': r'\f',
         '\n': r'\n',
@@ -292,8 +292,8 @@ class DataTypeManager(_DataTypeManager):
                 escaped_regex = data_type_kwargs[self.PATTERN_KEY].translate(
                     escape_characters
                 )
-                # TODO: remove unneeded escaped characters
-                data_type_kwargs[self.PATTERN_KEY] = f"r'{escaped_regex}'"
+                data_type_kwargs[self.PATTERN_KEY] = 'r' + repr(escaped_regex)
+
             return self.data_type.from_import(IMPORT_CONSTR, kwargs=data_type_kwargs)
         if strict:
             return self.strict_type_map[StrictTypes.str]
